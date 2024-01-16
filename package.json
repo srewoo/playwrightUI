@@ -1,0 +1,24 @@
+{
+  "name": "playwrightvc",
+  "version": "1.0.0",
+  "description": "vc automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts",
+    "install": "npm install",
+    "start": "node src/tests/test.spec.ts",
+    "ff": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts",
+    "ch": "npx playwright test --headed --browser webkit  /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts"
+  },
+  "keywords": [
+    "vc"
+  ],
+  "author": "srewoo",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.8",
+    "playwright": "^1.40.1",
+    "typescript": "^5.3.3"
+  }
+}
