@@ -6,9 +6,9 @@
     "test": "npx playwright test /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts",
     "testconfig": "yarn playwright test --config=playwright.config.js",
     "startall": "node playw/**/*.js",
-    "zoom": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testZoom.spec.ts",
-    "gmeet": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testGoogleMeet.spec.ts",
-    "teams": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testOutlookPexip.spec.ts"
+    "zoom": "npx playwright test --headed  playwright-framework/src/tests/testZoom.spec.ts",
+    "gmeet": "npx playwright test --headed playwright-framework/src/tests/testGoogleMeet.spec.ts",
+    "teams": "npx playwright test --headed playwright-framework/src/tests/testOutlookPexip.spec.ts"
   },
   "keywords": [
     "vc"
