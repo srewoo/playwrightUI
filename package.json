@@ -1,14 +1,14 @@
 {
-  "name": "playwrightvc",
-  "version": "1.0.0",
+  "name": "playwright",
   "description": "vc automation",
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts",
-    "install": "npm install",
-    "start": "node src/tests/test.spec.ts",
-    "ff": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts",
-    "ch": "npx playwright test --headed --browser webkit  /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/test.spec.ts"
+    "testconfig": "yarn playwright test --config=playwright.config.js",
+    "startall": "node playw/**/*.js",
+    "zoom": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testZoom.spec.ts",
+    "gmeet": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testGoogleMeet.spec.ts",
+    "teams": "npx playwright test --headed /Users/sharajrewoo/LearningProjectsSrewoo/VcToolDemo/playwright-framework/src/tests/testOutlookPexip.spec.ts"
   },
   "keywords": [
     "vc"
@@ -16,9 +16,10 @@
   "author": "srewoo",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.40.1",
+    "@playwright/test": "^1.41.0",
     "@types/node": "^20.10.8",
-    "playwright": "^1.40.1",
+    "npm": "^9.6.7",
+    "playwright": "^1.41.0",
     "typescript": "^5.3.3"
   }
 }

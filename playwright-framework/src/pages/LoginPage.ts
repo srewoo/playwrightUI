@@ -3,7 +3,9 @@ import BasePage from "./BasePage";
 import {
   APPLICATION_URL, EXTERNALEMAIL,CALLAIPASSWORD,GOOGLEUSERNAME
 } from ".././common/constants";
-import { expect } from "@playwright/test";
+import { expect }from "@playwright/test";
+
+
 
 export default class CalendarPage extends BasePage {
   isMeetingAdded: any;
@@ -12,8 +14,8 @@ export default class CalendarPage extends BasePage {
   }
 
   async loginCallAI(): Promise<void> {
-    // Implement login logic for Google Calendar
-    await this.page.context().clearCookies();
+
+    //await this.page.context().clearCookies();
 
     await this.page.goto(APPLICATION_URL);
     await this.page.getByPlaceholder('Enter username').fill(GOOGLEUSERNAME);

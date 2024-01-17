@@ -7,6 +7,9 @@ import {
   GOOGLE_CALENDAR_URL,
   ZOOM_MEETING_URL,
   EXTERNALEMAIL,
+  OUTLOOKEMAIL,
+  OUTLOOKPASSWORD,
+  OUTLOOKMAILURL
 } from ".././common/constants";
 import { startTime, endTime, playYouTubeVideo } from "../common/utilities";
 import { expect } from "playwright/test";
@@ -50,11 +53,8 @@ export default class CalendarPage extends BasePage {
 
     await this.page.getByPlaceholder("Add guests").click();
     await this.page.getByPlaceholder("Add guests").fill(EXTERNALEMAIL);
-    await this.page
-      .locator("div")
-      .filter({ hasText: /^abcd@mt\.com$/ })
-      .first()
-      .click();
+    await this.page.keyboard.press("Enter");
+
 
     await this.page.getByRole("combobox", { name: "Start time" }).click();
     await this.page
@@ -70,8 +70,6 @@ export default class CalendarPage extends BasePage {
 
     await this.page.getByLabel("Save").click();
     await this.page.getByRole("button", { name: "Send", exact: true }).click();
-
-    await this.page.screenshot({ path: "screenshot.png" });
 
     await this.page.waitForTimeout(6000);
 
@@ -138,9 +136,6 @@ export default class CalendarPage extends BasePage {
 
     await playYouTubeVideo();
 
-    //Intentionally placed wait time : Bot waiing in meetings
-    //await this.page.waitForTimeout(200000);
-
     await this. page.mouse.click(x, y);
 
 
@@ -153,4 +148,89 @@ export default class CalendarPage extends BasePage {
       .locator('button:has-text("End Meeting for All")')
       .click();
   }
+
+  async scheduleMeetingWithGoogleMeet(): Promise<void> {
+    const formattedStartTime = startTime();
+    const formattedEndTime = endTime();
+
+    // Implement logic to schedule a meeting with a Zoom URL
+    await this.page.getByRole("button", { name: "Create" }).click();
+    await this.page.waitForTimeout(3000);
+
+    await this.page.keyboard.press("Enter");
+
+    await this.page.getByRole("button", { name: "More options" }).click();
+
+    await this.page.click('[aria-label="Title"][placeholder="Add title"]');
+    await this.page.fill(
+      '[aria-label="Title"][placeholder="Add title"]',
+      "test playwright call Google Meet"
+    );
+
+    await this.page.getByPlaceholder("Add guests").click();
+    await this.page.getByPlaceholder("Add guests").fill(EXTERNALEMAIL);
+    await this.page.keyboard.press("Enter");
+
+    await this.page.waitForTimeout(8000)
+
+    await this.page.getByRole("combobox", { name: "Start time" }).click();
+    await this.page
+      .getByRole("combobox", { name: "Start time" })
+      .fill(formattedStartTime);
+    await this.page.getByRole("combobox", { name: "End time" }).click();
+    await this.page.getByLabel("End time").fill(formattedEndTime);
+
+    await this.page.getByLabel("Save").click();
+    await this.page.getByRole("button", { name: "Send", exact: true }).click();
+
+    await this.page.waitForTimeout(6000);
+
+    await expect(await this.page.title()).toContain("Google Calendar");
+
+  }
+  async scheduleMeetingWithOutlook(): Promise<void> {
+    const formattedStartTime = startTime();
+    const formattedEndTime = endTime();
+
+    await this.page.goto(OUTLOOKMAILURL)
+
+    await this.page.getByPlaceholder('Email, phone, or Skype').click();
+    await this.page.getByPlaceholder('Email, phone, or Skype').fill(OUTLOOKEMAIL);
+    await this.page.getByPlaceholder('Email, phone, or Skype').press('Enter');
+    await this.page.getByPlaceholder('Password').click();
+    await this.page.getByPlaceholder('Password').fill(OUTLOOKPASSWORD);
+    await this.page.getByPlaceholder('Password').press('Enter');
+    await this.page.getByRole('button', { name: 'Yes' }).click();
+
+    const element = await this.page.getByRole('button', { name: 'Dismiss all' }); 
+
+    // Check if the element is visible
+    const isVisible = await element.isVisible();
+
+    if (isVisible) {
+        // If visible, click on the element
+        await element.click();
+    } else {
+        console.log('Element is not visible.');
+    }
+
+    await this.page.setDefaultTimeout(3000)
+    await this.page.getByLabel('Expand to see more New options').click();
+    await this.page.getByLabel('Event', { exact: true }).click();
+
+    await this.page.getByPlaceholder('Add a title').click();
+    await this.page.getByPlaceholder('Add a title').fill('test call with outlook');
+
+    await this.page.getByRole('combobox', { name: 'Start time' }).click();
+    await this.page.getByRole('combobox', { name: 'Start time' }).fill(formattedStartTime);
+    await this.page.getByRole('combobox', { name: 'End time' }).click();
+    await this.page.getByRole('combobox', { name: 'End time' }).fill(formattedEndTime);
+    await this.page.getByLabel('Invite required attendees').click();
+
+    // await this.page.click('div[aria-label="Invite attendees"]');
+    // await this.page.fill('div[aria-label="Invite attendees"]',EXTERNALEMAIL);
+    await this.page.getByLabel('Teams meeting', { exact: true }).click();
+
+  }
+
 }

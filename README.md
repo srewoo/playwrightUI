@@ -1,11 +1,4 @@
 # playwrightUI
-- clone repo
-  - npm install
-  - npx playwright install
- 
-# Run commands 
-  - **zoom**: npm run zoom
-  - **googlemeet**: npm run gmeet [To Be added]
-  - **MS Teams**: npm run teams [To Be added]
-  
-    
+Set Up: npm install
+Run: npm run ff
+# Testing the Playwright UI library in a headless browser (Firefox)

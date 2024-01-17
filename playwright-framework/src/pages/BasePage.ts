@@ -13,6 +13,7 @@ export default class BasePage {
 
   async navigateTo(url: string): Promise<void> {
     await this.page.goto(GOOGLE_CALENDAR_URL);
+    await this.page.context().clearCookies();
   }
 }
 
